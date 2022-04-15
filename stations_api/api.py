@@ -1,25 +1,26 @@
 from typing import List
 from fastapi import FastAPI
+from stations_api.data.stations_repository import StationsRepository
 from stations_api.models.station import Station
 
 
 class Api:
-    def __init__(self):
-        pass
+    def __init__(self, stations_repository: StationsRepository):
+        self._stations_repository = stations_repository
 
     def create_app(self):
         app = FastAPI()
 
-        @app.get("/status")
+        @app.get("api/status")
         async def status():
             return "Running!"
 
-        @app.get("/stations/id/{id}", response_model=Station)
+        @app.get("api/stations/id/{id}", response_model=Station)
         async def get_station_by_id(id: int):
-            return Station()
+            return await self._stations_repository.get_by_id(id)
 
-        @app.get("/stations/name/{name}", response_model=List[Station])
+        @app.get("api/stations/name/{name}", response_model=List[Station])
         async def get_stations_by_name(name: str):
-            return []
+            return await self._stations_repository.get_by_name(name)
 
         return app
