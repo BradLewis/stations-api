@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "stations-api"
+version = "0.1.0"
+description = ""
+authors = ["Brad Lewis <22850972+BradLewis@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.75.1"
+mangum = "^0.14.1"
+uvicorn = "^0.17.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.3.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
