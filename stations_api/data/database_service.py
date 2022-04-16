@@ -1,5 +1,4 @@
 from contextlib import asynccontextmanager
-from aiomysql import Connection
 import aiomysql
 
 from stations_api.configuration import Configuration
@@ -11,7 +10,7 @@ class DatabaseService:
         self._config = config
 
     @asynccontextmanager
-    async def get_connection(self) -> Connection:
+    async def get_cursor(self):
         if self._pool is None:
             self._pool = await aiomysql.create_pool(
                 host=self._config.database_creds.host,
@@ -21,4 +20,5 @@ class DatabaseService:
             )
 
         async with self._pool.acquire() as conn:
-            yield conn
+            async with conn.cursor(aiomysql.DictCursor) as cursor:
+                yield cursor
