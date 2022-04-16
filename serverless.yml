@@ -79,7 +79,8 @@ functions:
     package:
       individually: true
       patterns:
-        - 'stations_api/*'
+        - 'stations_api/**'
+        - '!tests/**'
 
 plugins:
    - serverless-python-requirements

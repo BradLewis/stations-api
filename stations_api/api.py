@@ -17,10 +17,12 @@ class Api:
 
         @app.get("/api/stations/id/{id}", response_model=Station)
         async def get_station_by_id(id: int):
+            print(f"Retrieving station with id: {id}")
             return await self._stations_repository.get_by_id(id)
 
         @app.get("/api/stations/name/{name}", response_model=List[Station])
         async def get_stations_by_name(name: str):
+            print(f"Received request for stations with name: {name}")
             return await self._stations_repository.get_by_name(name)
 
         return app
