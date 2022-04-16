@@ -15,6 +15,6 @@ class StationsRepository:
     async def get_by_name(self, name: str) -> List[Dict]:
         async with self._database_service.get_cursor() as cursor:
             await cursor.execute(
-                "SELECT * FROM stations WHERE name like '%s%'", (name,)
+                "SELECT * FROM stations WHERE station_name like %s", (f"{name}%",)
             )
             return await cursor.fetchall()
