@@ -8,7 +8,7 @@ class StationsRepository:
 
     async def get_by_id(self, id: int) -> Dict:
         async with self._database_service.get_connection() as conn:
-            async with conn.cursor() as cursor:
+            async with conn.cursor(aiomysql.DictCursor) as cursor:
                 await cursor.execute("SELECT * FROM stations WHERE id = %s", (id,))
                 return await cursor.fetchone()
 

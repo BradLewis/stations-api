@@ -11,15 +11,15 @@ class Api:
     def create_app(self):
         app = FastAPI()
 
-        @app.get("api/status")
+        @app.get("/api/status")
         async def status():
             return "Running!"
 
-        @app.get("api/stations/id/{id}", response_model=Station)
+        @app.get("/api/stations/id/{id}", response_model=Station)
         async def get_station_by_id(id: int):
             return await self._stations_repository.get_by_id(id)
 
-        @app.get("api/stations/name/{name}", response_model=List[Station])
+        @app.get("/api/stations/name/{name}", response_model=List[Station])
         async def get_stations_by_name(name: str):
             return await self._stations_repository.get_by_name(name)
 
