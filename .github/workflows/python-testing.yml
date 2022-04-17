@@ -1,0 +1,40 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python Test and Lint
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9"]
+        poetry-version: ["1.1.13"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: abatilo/actions-poetry@v2.1.3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        poetry install
+    - name: Format with black
+      run: |
+        black --check stations_api
+    - name: Test with pytest
+      run: |
+        pytest --cov=./stations_api
+    - name: Codecov
+      run: |
+        codecov
