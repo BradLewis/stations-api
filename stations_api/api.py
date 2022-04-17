@@ -11,7 +11,7 @@ class Api:
     def create_app(self):
         app = FastAPI()
 
-        @app.get("/api/status")
+        @app.get("/api/stations/status")
         async def status():
             return "Running!"
 

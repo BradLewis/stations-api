@@ -4,6 +4,8 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.8
+  httpApi:
+    id: ${ssm:/weather-app/http-api-id}
 
 custom:
   pythonRequirements:
@@ -72,6 +74,10 @@ resources:
 functions:
   stations-api:
     handler: stations_api.app.handler
+    events:
+      - httpApi:
+          method: ANY
+          path: /api/stations/{proxy+}
     layers:
       - Ref: PythonRequirementsLambdaLayer
     timeout: 300
