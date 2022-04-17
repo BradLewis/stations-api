@@ -21,20 +21,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: abatilo/actions-poetry@v2.1.3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Set up poetry
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry==${{ matrix.poetry-version }}
     - name: Install dependencies
       run: |
         poetry install
     - name: Format with black
       run: |
-        black --check stations_api
+        poetry run black --check stations_api
     - name: Test with pytest
       run: |
-        pytest --cov=./stations_api
+        poetry run pytest --cov=./stations_api
     - name: Codecov
       run: |
-        codecov
+        poetry run codecov
