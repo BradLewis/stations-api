@@ -1,0 +1,11 @@
+{
+  "name": "stations-api",
+  "version": "1.0.0",
+  "description": "Deployment for the stations api using the serverless framework",
+  "keywords": [],
+  "author": "Brad Lewis",
+  "devDependencies": {
+    "serverless-python-requirements": "^5.4.0",
+    "serverless-vpc-discovery": "^4.0.2"
+  }
+}

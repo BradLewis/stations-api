@@ -8,7 +8,7 @@ provider:
 custom:
   pythonRequirements:
     layer: true
-    dockerizePip: non-linux
+    dockerizePip: false
     usePoetry: true
   vpcDiscovery:
     vpcName: default
@@ -81,6 +81,9 @@ functions:
       patterns:
         - 'stations_api/**'
         - '!tests/**'
+        - '!node_modules/**'
+        - '!package.json'
+        - '!package-lock.json'
 
 plugins:
    - serverless-python-requirements
