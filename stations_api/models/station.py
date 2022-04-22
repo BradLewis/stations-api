@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-import datetime as dt
 
 
 class Station(BaseModel):
@@ -11,5 +10,5 @@ class Station(BaseModel):
     latitude: float
     longitude: float
     elevation: int
-    first_year: dt.date
-    last_year: dt.date
+    first_year: int
+    last_year: int

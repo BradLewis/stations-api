@@ -9,20 +9,20 @@ class Api:
         self._stations_repository = stations_repository
 
     def create_app(self):
-        app = FastAPI()
+        app = FastAPI(root_path="/api/stations")
 
-        @app.get("/api/stations/status")
+        @app.get("/status")
         async def status():
             return "Running!"
 
-        @app.get("/api/stations/id/{id}", response_model=Station)
+        @app.get("/id/{id}", response_model=Station)
         async def get_station_by_id(id: int):
             print(f"Retrieving station with id: {id}")
             response = await self._stations_repository.get_by_id(id)
             print(f"Received response: {response}")
             return response
 
-        @app.get("/api/stations/name/{name}", response_model=List[Station])
+        @app.get("/name/{name}", response_model=List[Station])
         async def get_stations_by_name(name: str):
             print(f"Received request for stations with name: {name}")
             return await self._stations_repository.get_by_name(name)
