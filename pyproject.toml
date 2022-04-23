@@ -12,6 +12,7 @@ uvicorn = "^0.17.6"
 aiomysql = "^0.1.0"
 simple-injection = "^0.2.5"
 boto3 = "^1.21.42"
+loguru = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
