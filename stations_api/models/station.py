@@ -10,6 +10,6 @@ class Station(CamelModel):
     climate_id: str
     latitude: Optional[float]
     longitude: Optional[float]
-    elevation: Optional[int]
+    elevation: Optional[float]
     first_year: int
     last_year: int
