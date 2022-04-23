@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi_camelcase import CamelModel
 
 
@@ -7,8 +8,8 @@ class Station(CamelModel):
     station_name: str
     province: str
     climate_id: str
-    latitude: float
-    longitude: float
-    elevation: int
+    latitude: Optional[float]
+    longitude: Optional[float]
+    elevation: Optional[int]
     first_year: int
     last_year: int
