@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from fastapi_camelcase import CamelModel
 
 
-class Station(BaseModel):
+class Station(CamelModel):
     id: int
     station_id: int
     station_name: str
