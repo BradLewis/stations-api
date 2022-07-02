@@ -12,18 +12,6 @@ custom:
     layer: true
     dockerizePip: false
     usePoetry: true
-  vpcDiscovery:
-    vpcName: default
-    subnets:
-      - tagKey: az
-        tagValues:
-          - 'us-east-1a'
-          - 'us-east-1d'
-    securityGroups:
-      - tagKey: Name
-        tagValues:
-          - 'weather-db'
-          - 'vpc-endpoint'
 
 resources:
   Resources:
@@ -59,18 +47,10 @@ resources:
                         - 'log-group:/aws/lambda/*:*:*'
                 - Effect: Allow
                   Action:
-                    - ec2:CreateNetworkInterface
-                    - ec2:DescribeNetworkInterfaces
-                    - ec2:DetachNetworkInterface
-                    - ec2:DeleteNetworkInterface
-                  Resource: "*"
-                - Effect: Allow
-                  Action:
-                    - secretsmanager:GetSecretValue
-                    - secretsmanager:DescribeSecret
+                    - dynamodb:GetItem
+                    - dynamodb:BatchGetItem
                   Resource:
-                    - ${ssm:/weather-app/database-stations-api-creds}
-
+                    - ${ssm:/weather-app/stations-table-arn}
 functions:
   stations-api:
     handler: stations_api.app.handler
@@ -93,4 +73,3 @@ functions:
 
 plugins:
    - serverless-python-requirements
-   - serverless-vpc-discovery
